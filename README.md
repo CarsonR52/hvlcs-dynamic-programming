@@ -100,13 +100,10 @@ longer too, which is what is to be expected from a dynamic programming solution.
 
 Question 2:
 
-Let OPT(i, j) mean best total value we can still get using the rest of the strings starting at A[i] and B[j]. 
-If either string is finished already then the answer is simply 0 since there's nothing left to match up. 
-If current characters are different then the only real options are to skip one char from A or skip one
-char from B. So, we just take the better of those two results. If the current characters match, we also get
-a third option, to take that character, add its value, and move forward in both strings. This logic works out correctly
-and well because any optimal answer must start with making one of those choices, 
-so checking all them and taking the max gives the correct recurrence here
+Let OPT(i, j) mean best total value we can still get starting from position i in A and position j in B. If either string is already finished then OPT(i, j) is equal to 0 because there's nothing left to match. If A[i] and B[j] are different, the only real choices are to skip the current character in A or skip the current character in B, so
+OPT(i, j) = max(OPT(i+1, j), OPT(i, j+1)). If A[i] and B[j] match, then we get one extra option: take that character, add its value, and move forward in both strings, so OPT(i, j) = max(OPT(i+1, j), OPT(i, j+1), value(A[i]) + OPT(i+1, j+1))
+
+This works due to the reason that at every step, any optimal answer has to start by making one of those valid choices. So if we check all the possible good moves and take the maximum, we get the correct recurrence.
 
 Question 3:
 
